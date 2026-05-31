@@ -5,9 +5,10 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "predev": "tsoa spec-and-routes",
     "dev": "tsx watch src/index.ts",
     "start": "tsx src/index.ts",
-    "build": "tsc",
+    "build": "tsoa spec-and-routes && tsc",
     "preview": "node dist/index.js"
   },
   "keywords": [],
@@ -15,14 +16,18 @@
   "license": "ISC",
   "dependencies": {
     "@scalar/express-api-reference": "^0.9.19",
+    "@tsoa/runtime": "7.0.0-alpha.0",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "express-zod-api": "^28.1.0",
+    "swagger-ui-express": "^5.0.1",
+    "tsoa": "7.0.0-alpha.0",
     "typescript": "^6.0.3"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
     "@types/node": "^22.15.3",
+    "@types/swagger-ui-express": "^4.1.8",
     "tsx": "^4.22.3"
   },
   "compilerOptions": {

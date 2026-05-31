@@ -10,6 +10,8 @@ import placeOrderRouter from "./placeOrder";
 import searchProductsRouter from "./searchProducts";
 import recommendProductsRouter from "./recommendedProducts";
 import seedProductsRouter from "./bulkSeedProducts";
+import createAdminRouter from "./createAdmin";
+import loginRouter from "./login";
 
 const router = Router();
 
@@ -22,5 +24,7 @@ router.use("/api/v1/products", getAllProductsRouter);
 router.use("/api/v1/products", createProductRouter);
 router.use("/api/v1/products", deleteProductRouter);
 router.use("/api/v1/products", getSingleProductRouter);
+router.use("/api/v1/admin", createAdminRouter);
+router.use("/api/v1/login", loginRouter);
 
 export default router;
