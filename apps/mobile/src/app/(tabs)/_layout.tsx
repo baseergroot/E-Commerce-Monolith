@@ -6,9 +6,10 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: '#007AFF', // Color of active tab icon/text
+        // change active colour to the colour of shop now button at home header i.e. #FF6B6B and make the inactive text font bold
+        tabBarActiveTintColor: '#FF6B6B', // Color of active tab icon/text
         tabBarInactiveTintColor: '#8E8E93', // Color of inactive tab icon/text
-        headerShown: true, // Shows or hides the top screen header
+        headerShown: false, // Shows or hides the top screen header
       }}
     >
       <Tabs.Screen
@@ -33,7 +34,7 @@ export default function TabLayout() {
         name="cart"
         options={{
           title: 'Cart',
-          // headerShown: false,
+          
           tabBarIcon: ({ color, focused }) => (
             <Ionicons name={focused ? 'cart' : 'cart-outline'} size={24} color={color} />
           ),
