@@ -7,9 +7,9 @@
   "scripts": {
     "predev": "tsoa spec-and-routes",
     "dev": "tsx watch src/index.ts",
-    "start": "tsx src/index.ts",
+    "start": "node build/src/index.js",
     "build": "tsoa spec-and-routes && tsc",
-    "preview": "node dist/index.js"
+    "preview": "node build/src/index.js"
   },
   "keywords": [],
   "author": "",
