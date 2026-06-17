@@ -68,18 +68,23 @@ export default function ProductDetailScreen() {
             </View>
 
             {/* product details */}
-            <View className='w-full bg-white flex-1 px-5 py-3 mt-5'>
-              <View className='flex w-full flex-row justify-between items-center'>
+            <View className='w-full h-auto flex-1 px-5 py-3 mt-5 bg-gray-600'>
+              <View className='flex w-full flex-row justify-between '>
                 <Text className="text-xl font-bold w-[90%] text-ellipsis overflow-hidden flex flex-wrap">{product.name}</Text>
                 <Text className="text-xl font-bold w-[10%]">${product.price}</Text>
               </View>
-              {/* <Text className="text-xl font-bold">{product._id}</Text> */}
-            </View> 
+              <Text className="text-gray-600 mt-5">{product.description}</Text>
 
-            {/* add to cart */}
-            <TouchableOpacity className='w-full bg-gray-600 flex h-12'>
-              <Text className="text-xl font-bold">Add to cart</Text>
-            </TouchableOpacity>
+              {/* size / varient */}
+              
+
+              {/* qauntity */}
+
+              {/* add to cart */}
+
+            </View>
+
+
           </View>
         )
       }
