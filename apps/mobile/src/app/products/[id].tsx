@@ -9,13 +9,21 @@ import { Image } from 'react-native';
 import { ArrowLeft, Backpack, ShoppingBag, ShoppingCart } from 'lucide-react-native';
 import { TouchableOpacity } from 'react-native';
 import { StyleSheet } from 'react-native';
+import SizeBtn from '@/components/product/id/sizeBtn';
+import { useState } from 'react';
+import RecomendedProducts from '@/components/product/id/recomendedProducts';
+import { ScrollView } from 'react-native';
+import ProductQuantity from '@/components/product/id/productQuantity';
+import { addToCart } from '@/lib/asyncStorage';
 
 
 export default function ProductDetailScreen() {
   // The key 'id' corresponds exactly to the filename [id].tsx
   const { id } = useLocalSearchParams<{ id: string }>();
   const router = useRouter();
-  console.log(id);
+  const [selectedVariant, setSelectedVariant] = useState<'S' | 'M' | 'L' | 'XL' | 'XXL'>('M');
+  const [productQuantity, setProductQuantity] = useState<number>(1)
+  // console.log(id);
 
   const { data: product, isLoading, isError } = useQuery({
     queryKey: ['products', id],
@@ -44,6 +52,26 @@ export default function ProductDetailScreen() {
     )
   }
 
+  const productVarriants: {
+    size: 'S' | 'M' | 'L' | 'XL';
+    isSelected: boolean;
+  }[] = [{
+    size: 'S',
+    isSelected: true
+  },
+  {
+    size: 'M',
+    isSelected: false
+  },
+  {
+    size: 'L',
+    isSelected: false
+  },
+  {
+    size: 'XL',
+    isSelected: false
+  }]
+
   return (
     // replace style with nativewind
     <SafeAreaView className="flex-1 items-center bg-[#FAF8F5] h-full">
@@ -56,7 +84,7 @@ export default function ProductDetailScreen() {
                 <TouchableOpacity onPress={() => router.back()} className='bg-white rounded-full p-2'>
                   <ArrowLeft color={'black'} size={20} />
                 </TouchableOpacity>
-                <TouchableOpacity className='bg-white rounded-full p-2'>
+                <TouchableOpacity className='bg-white rounded-full p-2' onPress={() => router.replace('/(tabs)/cart')}>
                   <ShoppingBag color={'black'} size={20} />
                 </TouchableOpacity>
               </View>
@@ -68,7 +96,7 @@ export default function ProductDetailScreen() {
             </View>
 
             {/* product details */}
-            <View className='w-full h-auto flex-1 px-5 py-3 mt-5 bg-gray-600'>
+            <ScrollView className='w-full h-auto flex-1 px-5 py-3 mb-5 mt-5 '>
               <View className='flex w-full flex-row justify-between '>
                 <Text className="text-xl font-bold w-[90%] text-ellipsis overflow-hidden flex flex-wrap">{product.name}</Text>
                 <Text className="text-xl font-bold w-[10%]">${product.price}</Text>
@@ -76,14 +104,36 @@ export default function ProductDetailScreen() {
               <Text className="text-gray-600 mt-5">{product.description}</Text>
 
               {/* size / varient */}
-              
+              <View className='flex flex-row w-full gap-3 mt-5 '>
+                {
+                  productVarriants.map((item, index) => {
+                    return (
+                      <SizeBtn
+                        key={index + item.size}
+                        size={item.size}
+                        isSelected={item.size == selectedVariant}
+                        onPress={() => { setSelectedVariant(item.size) }} />
+                    )
+                  })
+                }
+
+              </View>
 
               {/* qauntity */}
+              
+              <ProductQuantity productQuantity={productQuantity} setProductQuantity={setProductQuantity}/>
 
-              {/* add to cart */}
+              {/* add to cart button */}
+              <TouchableOpacity
+              onPress={() => addToCart(product, productQuantity)}
+               className='bg-[#fe4343] w-full mt-5 text-center rounded-full py-3 flex flex-row items-center justify-center gap-5'>
+                <ShoppingBag color={'white'} size={20} />
+                <Text className='text-white font-bold' onPress={() => { }}>Add to cart</Text>
+              </TouchableOpacity>
 
-            </View>
-
+              {/* recomended products */}
+              <RecomendedProducts products={product} />
+            </ScrollView>
 
           </View>
         )
