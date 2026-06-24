@@ -1,6 +1,6 @@
 import { Product } from "@/types/product"
 import { useRouter } from "expo-router"
-import { Heart, Star } from "lucide-react-native"
+import { FontAwesome6 } from '@expo/vector-icons'
 import { Image, Text, TouchableOpacity, View } from "react-native"
 
 
@@ -14,7 +14,7 @@ const ProductComp = ({ product }: { product: Product }) => {
           className="object-cover w-full h-full"
         />
         <TouchableOpacity className="size-7 shadow-[0_2px_8px_rgba(0,0,0,0.1)] rounded-full bg-white/90 flex absolute right-2 top-2 justify-center items-center">
-          <Heart size={16} color="#FF6B6B" fill="#FF6B6B" />
+          <FontAwesome6 name="heart" size={12} color="#FF6B6B" />
         </TouchableOpacity>
       </View>
       <View className="px-1.5 pt-2.5 pb-1">
@@ -26,7 +26,7 @@ const ProductComp = ({ product }: { product: Product }) => {
             $ {product.price}
           </Text>
           <View className="flex flex-row items-center gap-0.5">
-            <Star size={12} color="#fbbf24" fill="#fbbf24" />
+            <FontAwesome6 name="star" size={10} color="#fbbf24" />
             <Text className="font-medium text-[#71717b] text-[10px]">
               4.8
             </Text>

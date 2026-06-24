@@ -1,6 +1,5 @@
 import { Tabs } from 'expo-router';
-// import ionicons
-import { Ionicons } from '@expo/vector-icons';
+import { FontAwesome6 } from '@expo/vector-icons';
 
 export default function TabLayout() {
   return (
@@ -17,26 +16,26 @@ export default function TabLayout() {
         options={{
           title: 'Home',
           tabBarIcon: ({ color, focused }) => (
-            <Ionicons name={focused ? 'home' : 'home-outline'} size={24} color={color} />
+            <FontAwesome6 name="house" size={20} color={color} solid={focused} />
           ),
         }}
       />
       <Tabs.Screen
         name="search"
         options={{
-          title: 'Search',
+          title: 'Discover',
           tabBarIcon: ({ color, focused }) => (
-            <Ionicons name={focused ? 'search' : 'search-outline'} size={24} color={color} />
+            <FontAwesome6 name="magnifying-glass" size={20} color={color} solid={focused} />
           ),
         }}
       />
       <Tabs.Screen
         name="cart"
         options={{
-          title: 'Cart',
+          title: 'Bag',
           
           tabBarIcon: ({ color, focused }) => (
-            <Ionicons name={focused ? 'cart' : 'cart-outline'} size={24} color={color} />
+            <FontAwesome6 name="bag-shopping" size={20} color={color} solid={focused} />
           ),
         }}
       />

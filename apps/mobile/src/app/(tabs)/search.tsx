@@ -44,7 +44,7 @@ export default function SearchScreen() {
 
   return (
     <SafeAreaView className="flex-1 flex-col gap-5 px-5 bg-[#FAF8F5]">
-      <Text className='py-3 font-bold text-xl mx-5'>Search</Text>
+      <Text className='py-3 font-bold text-xl mx-5'>Discover</Text>
       <SearchInput searchInput={searchInput} setSearchInput={setSearchInput} />
 
       {/* recent searches section  */}

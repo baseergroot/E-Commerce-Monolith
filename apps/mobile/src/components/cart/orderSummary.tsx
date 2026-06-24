@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity } from 'react-native'
-import { ArrowRightIcon } from 'lucide-react-native'
+import { FontAwesome6 } from '@expo/vector-icons'
 import { CartItemType } from '@/lib/asyncStorage'
 
 const OrderSummary = ({cartItems}: {cartItems: CartItemType[]}) => {
@@ -11,7 +11,7 @@ const OrderSummary = ({cartItems}: {cartItems: CartItemType[]}) => {
     // #f5ebdb
 
     <View className='bg-[#f5ebdb] px-5 py-5 mx-5 rounded-xl flex flex-col gap-1'>
-      <Text className='font-bold text-lg mb-2'>Order Summary</Text>
+      <Text className='font-bold text-lg mb-2'>Checkout Summary</Text>
 
       <View className='flex flex-row justify-between'>
         <Text>Subtotal</Text>
@@ -34,9 +34,9 @@ const OrderSummary = ({cartItems}: {cartItems: CartItemType[]}) => {
       {/* proceed to checkout */}
       {
         cartItems.length > 0 && (
-          <TouchableOpacity className='bg-black text-white px-5 py-3 rounded-xl mt-5 flex flex-row justify-center items-center gap-2'>
-        <Text className='text-white font-bold'>Proceed to Checkout</Text>
-        <ArrowRightIcon color={'white'} />
+        <TouchableOpacity className='bg-black text-white px-5 py-3 rounded-xl mt-5 flex flex-row justify-center items-center gap-2'>
+        <Text className='text-white font-bold'>Continue to Checkout</Text>
+        <FontAwesome6 name="arrow-right" size={14} color="white" />
       </TouchableOpacity>
         )
       }

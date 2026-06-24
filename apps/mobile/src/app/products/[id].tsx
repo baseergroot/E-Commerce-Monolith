@@ -6,7 +6,7 @@ import { getProductById } from '@/lib/axiosClient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button } from 'expo-router/build/react-navigation';
 import { Image } from 'react-native';
-import { ArrowLeft, ShoppingBag } from 'lucide-react-native';
+import { FontAwesome6 } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native';
 import { StyleSheet } from 'react-native';
 import SizeBtn from '@/components/product/id/sizeBtn';
@@ -81,10 +81,10 @@ export default function ProductDetailScreen() {
             <View className='w-full bg-gray-600 flex max-h-72' style={style.imageContainer}>
               <View className='flex flex-row justify-between w-full px-5 py-5 items-center z-10 absolute top-0 left-0 right-0 '>
                 <TouchableOpacity onPress={() => router.back()} className='bg-white rounded-full p-2'>
-                  <ArrowLeft size={20} color="#000000" />
+                  <FontAwesome6 name="arrow-left" size={16} color="#000000" />
                 </TouchableOpacity>
                 <TouchableOpacity className='bg-white rounded-full p-2' onPress={() => router.replace('/(tabs)/cart')}>
-                  <ShoppingBag size={20} color="#000000" />
+                  <FontAwesome6 name="bag-shopping" size={16} color="#000000" />
                 </TouchableOpacity>
               </View>
               <Image
@@ -126,8 +126,8 @@ export default function ProductDetailScreen() {
               <TouchableOpacity
               onPress={() => addToCart(product, productQuantity)}
                className='bg-[#fe4343] w-full mt-5 text-center rounded-full py-3 flex flex-row items-center justify-center gap-5'>
-                <ShoppingBag size={20} color="#ffffff" />
-                <Text className='text-white font-bold' onPress={() => { }}>Add to cart</Text>
+                <FontAwesome6 name="bag-shopping" size={16} color="#ffffff" />
+                <Text className='text-white font-bold' onPress={() => { }}>Add to bag</Text>
               </TouchableOpacity>
 
               {/* recomended products */}

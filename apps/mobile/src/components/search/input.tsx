@@ -1,4 +1,4 @@
-import { SearchIcon } from "lucide-react-native";
+import { FontAwesome6 } from '@expo/vector-icons';
 import { View, TextInput } from "react-native";
 
 const SearchInput = ({
@@ -10,7 +10,7 @@ const SearchInput = ({
 }) => {
     return (
         <View className="flex-row items-center h-12 px-6 py-3 bg-white rounded-3xl mx-5">
-            <SearchIcon size={18} color="#ea580c" />
+            <FontAwesome6 name="magnifying-glass" size={16} color="#ea580c" />
             <TextInput
                 style={{
                     flex: 1,
@@ -19,7 +19,7 @@ const SearchInput = ({
                     fontSize: 16,
                     paddingHorizontal: 8,
                 }}
-                placeholder="Search products"
+                placeholder="Search the collection"
                 placeholderTextColor="#9ca3af"
                 autoCapitalize="none"
                 autoCorrect={false}

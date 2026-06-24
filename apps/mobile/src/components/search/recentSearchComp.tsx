@@ -24,7 +24,7 @@ const RecentSearchComp = ({debounceSearchInput, setSearchInput}: {debounceSearch
 
   return (
     <View className='flex flex-col gap-3 mx-5 mt-3'>
-        <Text className='font-bold text-lg'>Recent Searches</Text>
+        <Text className='font-bold text-lg'>Recent Finds</Text>
         <View className="flex flex-row flex-wrap gap-3">
           {
           recentSearches.map((search, index) => (

@@ -5,11 +5,11 @@ const ProductsHeader = ({ handleFilter }: { handleFilter: (filter: string) => vo
   return (
     <View className="flex flex-row px-6 pt-5 pb-3 justify-between items-center">
       <Text className="font-extrabold text-zinc-950 text-base leading-6">
-        Popular Picks
+        Featured Finds
       </Text>
       <TouchableOpacity onPress={() => handleFilter("All")}>
         <Text className="font-semibold text-[#FF6B6B] leading-4">
-          See all
+          View all
         </Text>
       </TouchableOpacity>
     </View>

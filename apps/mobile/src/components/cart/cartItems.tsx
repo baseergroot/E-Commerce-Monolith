@@ -12,19 +12,19 @@ const CartItems = ({cartItems, setCartItems}: {cartItems: CartItemType[], setCar
 
     <View className='bg-[#f5ebdb] px-5 py-2 mx-5 mb-5 rounded-xl flex flex-col gap-5'>
       <View className='flex flex-row justify-between'>
-        <Text className='font-bold text-lg mb-2'>Cart Items</Text>
+        <Text className='font-bold text-lg mb-2'>Bag Items</Text>
         <TouchableOpacity onPress={async () => {
           await clearCart()
           const items = await getCartItems()
           setCartItems([])
         }}>
-          <Text className='text-red-400 text-sm leading-6 font-bold'>Clear All</Text>
+          <Text className='text-red-400 text-sm leading-6 font-bold'>Remove all</Text>
         </TouchableOpacity>
       </View>
 
       {/* cart product component */}
       {
-        cartItems.length == 0 ? <Text className='text-center text-lg font-bold'>Cart is empty</Text> : 
+        cartItems.length == 0 ? <Text className='text-center text-lg font-bold'>Your bag is empty</Text> : 
       cartItems?.map((item:CartItemType) => (
         <CartProductComp key={item._id + Math.random()} item={item} />
       ))} 
