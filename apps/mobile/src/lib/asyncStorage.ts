@@ -53,7 +53,7 @@ const removeItem = async () => {
 
 
 const cartKey = 'cart'
-type CartItemType = Product & {quantity:number}
+export type CartItemType = Product & {quantity:number}
 
 const getCartItems = async (): Promise<CartItemType[] | undefined> => {
   try {
@@ -126,4 +126,13 @@ const updateCartItemQuantity = async (productId:string, quantity:number) => {
   }
 }
 
-export { setItem, getItem, removeItem, getCartItems, addToCart, removeFromCart, updateCartItemQuantity }
+const clearCart = async () => {
+  try {
+    await AsyncStorage.removeItem(cartKey);
+  } catch (e) {
+    // error reading value
+    console.log(e)
+  }
+}
+
+export { setItem, getItem, removeItem, getCartItems, addToCart, removeFromCart, updateCartItemQuantity, clearCart }

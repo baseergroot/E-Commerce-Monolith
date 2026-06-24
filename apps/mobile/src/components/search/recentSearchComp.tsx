@@ -23,7 +23,7 @@ const RecentSearchComp = ({debounceSearchInput, setSearchInput}: {debounceSearch
   }, [debounceSearchInput])
 
   return (
-    <View className='flex flex-col gap-3'>
+    <View className='flex flex-col gap-3 mx-5 mt-3'>
         <Text className='font-bold text-lg'>Recent Searches</Text>
         <View className="flex flex-row flex-wrap gap-3">
           {

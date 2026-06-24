@@ -1,27 +1,43 @@
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView } from 'react-native-safe-area-context'
+import Navbar from '@/components/shared/navbar'
+import CartHeader from '@/components/cart/cartHeader'
+import OrderSummary from '@/components/cart/orderSummary'
+import CartItems from '@/components/cart/cartItems'
+import { useEffect, useState } from 'react'
+import { CartItemType, getCartItems } from '@/lib/asyncStorage'
+import { ScrollView, View } from 'react-native'
 
-export default function CartScreen() {
-  console.log("cart rendered")
+const CartScreen = () => {
+  const [cartItems, setCartItems] = useState<CartItemType[]>([])
+
+  useEffect(() => {
+    const fetchCartItems = async () => {
+      const allCartItems = await getCartItems()
+      if (allCartItems && allCartItems.length > 0) {
+        setCartItems(allCartItems)
+      }
+    }
+    fetchCartItems()
+  }, [])
+
   return (
-    <SafeAreaView>
-      <ScrollView contentContainerClassName="flex-col gap-5 items-center pb-10" 
-        className="flex-1">
+    <SafeAreaView className='flex-1 bg-[#FAF8F5] '>
 
-        {/* three sections */}
+      {/* Navbar */}
+      <Navbar />
 
-        {/* Hero */}
-        <View className='bg-slate-600 h-48 w-full '>
-          <Text className='text-green-600'>Your Cart</Text>
+      {/* Cart Header */}
+      <CartHeader />
+
+      <ScrollView>
+        <View className="pb-60">
+          <CartItems cartItems={cartItems} setCartItems={setCartItems}/>
+          <OrderSummary cartItems={cartItems}/>
         </View>
-
-        {/* cart items list */}
-        <View className='bg-red-300'></View>
-
-        {/* Order summary */}
-        <View className='bg-green-300'></View>
       </ScrollView>
-    </SafeAreaView>
-  );
-}
  
+    </SafeAreaView>
+  )
+}
+
+export default CartScreen

@@ -1,7 +1,32 @@
 {
-  "editor.codeActionsOnSave": {
-    "source.fixAll": "explicit",
-    "source.organizeImports": "explicit",
-    "source.sortMembers": "explicit"
-  }
+  "tailwindCSS.classAttributes": [
+    "class",
+    "className",
+    "contentContainerClassName",
+    "columnWrapperClassName",
+    "ListHeaderComponentClassName",
+    "ListFooterComponentClassName",
+    "imageClassName",
+    "tintColorClassName",
+    "placeholderTextColorClassName",
+    "selectionColorClassName",
+    "cursorColorClassName",
+    "selectionHandleColorClassName",
+    "underlineColorAndroidClassName",
+    "colorsClassName",
+    "colorClassName",
+    "backgroundColorClassName",
+    "backdropColorClassName",
+    "thumbColorClassName",
+    "trackColorOnClassName",
+    "trackColorOffClassName",
+    "ios_backgroundColorClassName",
+    "endFillColorClassName",
+    "progressBackgroundColorClassName",
+    "titleColorClassName",
+    "underlayColorClassName"
+  ],
+  "tailwindCSS.classFunctions": [
+    "useResolveClassNames"
+  ]
 }

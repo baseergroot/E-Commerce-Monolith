@@ -20,7 +20,7 @@ const Hero = () => {
               </Text>
               <TouchableOpacity className="shadow-[0_6px_16px_rgba(255,107,107,0.4)] rounded-full bg-[#FF6B6B] flex flex-row px-5 py-2.5 items-center gap-1 self-start">
                 <Text className="font-bold text-white text-xs leading-4">Shop Now</Text>
-                <ArrowRight className="size-3.5 text-white" />
+                <ArrowRight size={14} color="#ffffff" />
               </TouchableOpacity>
             </View>
             <View className="size-28 shadow-[0_14px_24px_rgba(0,0,0,0.18)] shrink-0 rounded-2xl overflow-hidden">

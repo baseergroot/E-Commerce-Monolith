@@ -10,6 +10,7 @@ import { useQuery } from '@tanstack/react-query';
 import useDebounce from '@/hooks/debounce';
 import { setItem } from '@/lib/asyncStorage';
 import RecentSearchComp from '@/components/search/recentSearchComp';
+import { FlashList } from '@shopify/flash-list';
 
 
 export default function SearchScreen() {
@@ -42,8 +43,8 @@ export default function SearchScreen() {
   } , [debounceSearchInput]) 
 
   return (
-    <SafeAreaView className="flex flex-col gap-5 px-5 bg-[#FAF8F5]">
-      <Text className='py-3 font-bold text-xl'>Search</Text>
+    <SafeAreaView className="flex-1 flex-col gap-5 px-5 bg-[#FAF8F5]">
+      <Text className='py-3 font-bold text-xl mx-5'>Search</Text>
       <SearchInput searchInput={searchInput} setSearchInput={setSearchInput} />
 
       {/* recent searches section  */}
@@ -55,20 +56,21 @@ export default function SearchScreen() {
 
 
       {/* should use FlatList instead of map */}
-      <FlatList
-        data={products}
-        renderItem={({ item }) => (
-          <ProductComp product={item} />
-        )}
-        numColumns={2}
-        keyExtractor={(item) => item._id}
-        contentContainerStyle={{ gap: 16 }}
-        columnWrapperStyle={{ gap: 16 }}
-        showsVerticalScrollIndicator={false}
-      />
+      <View className='flex-1'>
+        <FlashList
+          data={products}
+          renderItem={({ item }) => (
+            <View className="m-2">
+              <ProductComp product={item} />
+            </View>
+          )}
+          numColumns={2}
+          keyExtractor={(item) => item._id}
+          contentContainerStyle={{ paddingBottom: 24, paddingHorizontal: 2 }}
+          showsVerticalScrollIndicator={false}
+        />
+      </View>
 
     </SafeAreaView>
   );
 }
-
-

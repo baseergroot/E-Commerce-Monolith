@@ -1,26 +1,39 @@
 import { SearchIcon } from "lucide-react-native";
-import { useEffect } from "react";
-import { View, Text, TextInput } from "react-native";
+import { View, TextInput } from "react-native";
 
-
-const SearchInput = ({ searchInput, setSearchInput }: { searchInput: string, setSearchInput: (input: string) => void }) => {
-    // useEffect(() => {
-    //     console.log({ searchInput })
-    // }, [searchInput])
+const SearchInput = ({
+    searchInput,
+    setSearchInput,
+}: {
+    searchInput: string;
+    setSearchInput: (input: string) => void;
+}) => {
     return (
-        <View className="px-6 py-3 w-full h-12 rounded-3xl bg-white flex flex-row items-center">
-
-            {/* icon before input */}
-            <SearchIcon color={"#ea580c"} className="text-lg w-1/10" />
+        <View className="flex-row items-center h-12 px-6 py-3 bg-white rounded-3xl mx-5">
+            <SearchIcon size={18} color="#ea580c" />
             <TextInput
-                style={{ color: 'black', height: 48, padding: 8, width: '90%' }}
+                style={{
+                    flex: 1,
+                    minWidth: 0,
+                    color: '#000000',
+                    fontSize: 16,
+                    paddingHorizontal: 8,
+                }}
                 placeholder="Search products"
-                placeholderTextColor="#000"
+                placeholderTextColor="#9ca3af"
+                autoCapitalize="none"
+                autoCorrect={false}
+                autoFocus={false}
+                keyboardType="default"
+                secureTextEntry={false}
+                textContentType="none"
+                autoComplete="off"
+                importantForAutofill="no"
                 value={searchInput}
                 onChangeText={setSearchInput}
             />
         </View>
-    )
-}
+    );
+};
 
 export default SearchInput
