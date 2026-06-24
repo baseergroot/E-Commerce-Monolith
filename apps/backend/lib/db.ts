@@ -1,15 +1,28 @@
 import mongoose from "mongoose";
 
+let connectionPromise: Promise<typeof mongoose> | null = null;
+
 export default async function connectDB() {
   const mongo_uri = process.env.MONGO_URI;
   if (!mongo_uri) {
-    throw new Error("MONGO_URI is not defined");
+    console.warn("MONGO_URI is not defined; skipping database connection.");
+    return;
   }
-  
+
+  if (mongoose.connection.readyState === 1) {
+    return;
+  }
+
+  if (!connectionPromise) {
+    connectionPromise = mongoose.connect(mongo_uri);
+  }
+
   try {
-    await mongoose.connect(mongo_uri);
+    await connectionPromise;
     console.log("Database connected");
   } catch (error) {
+    connectionPromise = null;
     console.error("Database connection failed", error);
+    throw error;
   }
 }

@@ -12,8 +12,6 @@ const app = express();
 
 app.use(express.json());
 
-await connectDB();
-
 app.get("/", (_req, res) => {
   res.send("Hello World! from backend");
 });
@@ -32,7 +30,23 @@ RegisterRoutes(app);
 // Use existing router for any routes not migrated to TSOA (like seed, order, search, etc.)
 app.use(router);
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+async function bootstrapDatabase() {
+  try {
+    await connectDB();
+  } catch (error) {
+    console.error("Database initialization failed", error);
+  }
+}
+
+if (process.env.VERCEL) {
+  void bootstrapDatabase();
+} else {
+  const port = process.env.PORT || 3000;
+  void bootstrapDatabase().finally(() => {
+    app.listen(port, () => {
+      console.log(`Server is running on port ${port}`);
+    });
+  });
+}
+
+export default app;
