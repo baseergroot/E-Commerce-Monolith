@@ -14,7 +14,10 @@ export default async function connectDB() {
   }
 
   if (!connectionPromise) {
-    connectionPromise = mongoose.connect(mongo_uri);
+    connectionPromise = mongoose.connect(mongo_uri, {
+      serverSelectionTimeoutMS: 5000,
+      connectTimeoutMS: 5000,
+    });
   }
 
   try {

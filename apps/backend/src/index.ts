@@ -5,12 +5,33 @@ import dotenv from "dotenv";
 import swaggerUi from "swagger-ui-express";
 import { RegisterRoutes } from "./generated/routes";
 import fs from "fs";
+import mongoose from "mongoose";
 
 dotenv.config();
 
 const app = express();
 
 app.use(express.json());
+
+app.use((req, res, next) => {
+  if (
+    req.path === "/" ||
+    req.path === "/docs" ||
+    req.path === "/api/v1/health" ||
+    req.path.startsWith("/docs/")
+  ) {
+    return next();
+  }
+
+  if (mongoose.connection.readyState !== 1) {
+    return res.status(503).json({
+      success: false,
+      message: "Database is not connected yet",
+    });
+  }
+
+  return next();
+});
 
 app.get("/", (_req, res) => {
   res.send("Hello World! from backend");
