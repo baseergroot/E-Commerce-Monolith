@@ -2,9 +2,11 @@ import express from "express";
 import connectDB from "../lib/db.js";
 import router from "../routes/helper.js";
 import dotenv from "dotenv";
-import swaggerUi from "swagger-ui-express";
+import { apiReference } from "@scalar/express-api-reference";
 import { RegisterRoutes } from "./generated/routes.js";
-import fs from "fs";
+import { readFileSync } from "fs";
+import { fileURLToPath } from "url";
+import { dirname, join } from "path";
 import mongoose from "mongoose";
 
 dotenv.config();
@@ -24,6 +26,10 @@ app.use((req, res, next) => {
   }
 
   if (mongoose.connection.readyState !== 1) {
+    console.warn(
+      `[DB] Blocking ${req.method} ${req.path} — readyState=${mongoose.connection.readyState} ` +
+      `(0=disconnected, 1=connected, 2=connecting, 3=disconnecting)`
+    );
     return res.status(503).json({
       success: false,
       message: "Database is not connected yet",
@@ -37,13 +43,20 @@ app.get("/", (_req, res) => {
   res.send(`Hello World! from backend, ${mongoose.connection.readyState}`);
 });
 
-// Serve swagger docs
-app.use("/docs", swaggerUi.serve, (_req: any, res: any) => {
-  const swaggerDoc = JSON.parse(
-    fs.readFileSync(new URL("./generated/swagger.json", import.meta.url), "utf-8")
+// Serve Scalar API reference (works on Vercel, unlike swagger-ui-express which needs express.static())
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+let swaggerDoc: Record<string, unknown> | null = null;
+try {
+  swaggerDoc = JSON.parse(
+    readFileSync(join(__dirname, "generated/swagger.json"), "utf-8")
   );
-  return res.send(swaggerUi.generateHTML(swaggerDoc));
-});
+} catch {
+  console.warn("swagger.json not found at", join(__dirname, "generated/swagger.json"));
+}
+app.use("/docs", apiReference({
+  spec: { content: swaggerDoc ?? {} },
+}));
 
 // Register TSOA auto-generated routes FIRST so they handle products endpoints
 RegisterRoutes(app);
