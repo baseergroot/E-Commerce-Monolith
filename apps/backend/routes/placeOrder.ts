@@ -1,5 +1,5 @@
 import { Router } from "express";
-import Order from "../models/order";
+import Order from "../models/order.js";
 
 
 const placeOrderRouter = Router();

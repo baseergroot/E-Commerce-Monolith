@@ -1,5 +1,5 @@
 import { Router } from "express";
-import User from "../models/user";
+import User from "../models/user.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 

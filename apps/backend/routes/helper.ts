@@ -1,17 +1,17 @@
 // this import all routers and add prefix to them api/v1
 
 import { Router } from "express";
-import getAllProductsRouter from "./getAllProducts";
-import healthRouter from "./health";
-import createProductRouter from "./createProduct";
-import deleteProductRouter from "./deleteProduct";
-import getSingleProductRouter from "./getSingleProduct";
-import placeOrderRouter from "./placeOrder";
-import searchProductsRouter from "./searchProducts";
-import recommendProductsRouter from "./recommendedProducts";
-import seedProductsRouter from "./bulkSeedProducts";
-import createAdminRouter from "./createAdmin";
-import loginRouter from "./login";
+import getAllProductsRouter from "./getAllProducts.js";
+import healthRouter from "./health.js";
+import createProductRouter from "./createProduct.js";
+import deleteProductRouter from "./deleteProduct.js";
+import getSingleProductRouter from "./getSingleProduct.js";
+import placeOrderRouter from "./placeOrder.js";
+import searchProductsRouter from "./searchProducts.js";
+import recommendProductsRouter from "./recommendedProducts.js";
+import seedProductsRouter from "./bulkSeedProducts.js";
+import createAdminRouter from "./createAdmin.js";
+import loginRouter from "./login.js";
 
 const router = Router();
 

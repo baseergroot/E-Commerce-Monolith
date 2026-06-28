@@ -7,9 +7,9 @@
   "scripts": {
     "predev": "tsoa spec-and-routes",
     "dev": "tsx watch src/index.ts",
-    "build": "tsoa spec-and-routes && tsc",
-    "start": "node dist/index.js",
-    "preview": "node dist/index.js"
+    "build": "tsoa spec-and-routes && node fix-imports.cjs && tsc && cp src/generated/swagger.json dist/src/generated/swagger.json",
+    "start": "node dist/src/index.js",
+    "preview": "node dist/src/index.js"
   },
   "keywords": [],
   "author": "",
@@ -32,12 +32,5 @@
     "@types/node": "^22.15.3",
     "@types/swagger-ui-express": "^4.1.8",
     "tsx": "^4.22.3"
-  },
-  "compilerOptions": {
-    "target": "ES2022",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "strict": true,
-    "esModuleInterop": true
   }
 }

@@ -11,8 +11,8 @@ import {
   Route,
   SuccessResponse,
 } from "tsoa";
-import Product from "../../models/product";
-import Order from "../../models/order";
+import Product from "../../models/product.js";
+import Order from "../../models/order.js";
 
 export interface ProductPayload {
   name: string;

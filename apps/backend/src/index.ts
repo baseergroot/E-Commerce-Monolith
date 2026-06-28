@@ -1,9 +1,9 @@
 import express from "express";
-import connectDB from "../lib/db";
-import router from "../routes/helper";
+import connectDB from "../lib/db.js";
+import router from "../routes/helper.js";
 import dotenv from "dotenv";
 import swaggerUi from "swagger-ui-express";
-import { RegisterRoutes } from "./generated/routes";
+import { RegisterRoutes } from "./generated/routes.js";
 import fs from "fs";
 import mongoose from "mongoose";
 
