@@ -15,7 +15,7 @@ const app = express();
 
 app.use(express.json());
 
-app.use((req, res, next) => {
+app.use(async (req, res, next) => {
   if (
     req.path === "/" ||
     req.path === "/docs" ||
@@ -26,14 +26,17 @@ app.use((req, res, next) => {
   }
 
   if (mongoose.connection.readyState !== 1) {
-    console.warn(
-      `[DB] Blocking ${req.method} ${req.path} — readyState=${mongoose.connection.readyState} ` +
-      `(0=disconnected, 1=connected, 2=connecting, 3=disconnecting)`
-    );
-    return res.status(503).json({
-      success: false,
-      message: "Database is not connected yet",
-    });
+    const state = mongoose.connection.readyState;
+    console.log(`[DB] readyState=${state} for ${req.method} ${req.path}, waiting for connection...`);
+    try {
+      await connectDB();
+    } catch {
+      console.warn("[DB] Connection attempt failed, returning 503");
+      return res.status(503).json({
+        success: false,
+        message: "Database is not connected yet",
+      });
+    }
   }
 
   return next();
