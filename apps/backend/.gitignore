@@ -1,0 +1,4 @@
+# Compiled JS outputs in source directories (should only live in dist/)
+lib/*.js
+models/*.js
+routes/*.js

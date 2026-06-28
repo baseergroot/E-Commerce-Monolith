@@ -14,5 +14,6 @@
     "resolveJsonModule": true,
     "skipLibCheck": true
   },
-  "include": ["src/**/*", "models/**/*", "routes/**/*", "lib/**/*"]
+  "include": ["src/**/*", "models/**/*", "routes/**/*", "lib/**/*"],
+  "exclude": ["**/*.js", "**/*.d.ts", "dist", "node_modules"]
 }
