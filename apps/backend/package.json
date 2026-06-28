@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/index.ts",
+    "swagger": "node /src/index.ts",
     "build": "tsc",
     "start": "node dist/src/index.js",
     "preview": "node dist/src/index.js"
