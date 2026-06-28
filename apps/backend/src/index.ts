@@ -34,7 +34,7 @@ app.use((req, res, next) => {
 });
 
 app.get("/", (_req, res) => {
-  res.send("Hello World! from backend");
+  res.send(`Hello World! from backend, ${mongoose.connection.readyState}`);
 });
 
 // Serve swagger docs
