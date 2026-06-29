@@ -6,7 +6,7 @@
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "outputs": [".next/**", "!.next/cache/**"],
-      "env": ["PORT", "MONGO_URI", "JWT_SECRET"]
+      "env": ["PORT", "MONGO_URI", "JWT_SECRET", "BASE_URL", "NODE_ENV"]
     },
     "lint": {
       "dependsOn": ["^lint"]
@@ -17,6 +17,12 @@
     "dev": {
       "cache": false,
       "persistent": true
+    },
+    "swagger": {
+      "dependsOn": ["build"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": ["public/swagger-output.json"],
+      "env": ["PORT", "MONGO_URI", "JWT_SECRET", "BASE_URL", "NODE_ENV"]
     }
   }
 }
