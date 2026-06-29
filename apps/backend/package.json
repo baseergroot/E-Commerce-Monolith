@@ -15,17 +15,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^22.15.3",
     "bcryptjs": "^3.0.3",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.6.3",
     "swagger-autogen": "^2.23.7",
+    "tsx": "^4.22.3",
     "typescript": "^6.0.3"
-  },
-  "devDependencies": {
-    "@types/express": "^5.0.6", 
-    "@types/node": "^22.15.3",
-    "tsx": "^4.22.3"
   }
 }

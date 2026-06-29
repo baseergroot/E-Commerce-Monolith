@@ -33,6 +33,12 @@ importers:
 
   apps/backend:
     dependencies:
+      '@types/express':
+        specifier: ^5.0.6
+        version: 5.0.6
+      '@types/node':
+        specifier: ^22.15.3
+        version: 22.15.3
       bcryptjs:
         specifier: ^3.0.3
         version: 3.0.3
@@ -51,19 +57,12 @@ importers:
       swagger-autogen:
         specifier: ^2.23.7
         version: 2.23.7
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
-    devDependencies:
-      '@types/express':
-        specifier: ^5.0.6
-        version: 5.0.6
-      '@types/node':
-        specifier: ^22.15.3
-        version: 22.15.3
       tsx:
         specifier: ^4.22.3
         version: 4.22.3
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
 
   apps/mobile:
     dependencies:
