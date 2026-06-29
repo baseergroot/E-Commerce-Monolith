@@ -2,6 +2,7 @@ import express from "express";
 import connectDB from "../lib/db.js";
 import router from "../routes/helper.js";
 import dotenv from "dotenv";
+import { readFileSync } from "fs";
 import mongoose from "mongoose";
 
 dotenv.config();
@@ -13,7 +14,9 @@ app.use(express.json());
 app.use(async (req, res, next) => {
   if (
     req.path === "/" ||
-    req.path === "/api/v1/health"
+    req.path === "/docs" ||
+    req.path === "/api/v1/health" ||
+    req.path === "/swagger-output.json"
   ) {
     return next();
   }
@@ -36,6 +39,32 @@ app.use(async (req, res, next) => {
 
 app.get("/", (_req, res) => {
   res.send(`Hello World! from backend, ${mongoose.connection.readyState}`);
+});
+
+// Serve swagger spec
+app.get("/swagger-output.json", (_req, res) => {
+  try {
+    const spec = readFileSync("public/swagger-output.json", "utf-8");
+    res.json(JSON.parse(spec));
+  } catch {
+    res.status(404).json({ error: "swagger-output.json not found" });
+  }
+});
+
+// Serve Swagger UI docs (CDN-based, no express.static needed)
+app.get("/docs", (_req, res) => {
+  res.type("text/html").send(`<!DOCTYPE html>
+<html>
+<head>
+  <title>API Docs</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swagger-ui-dist@5/swagger-ui.css">
+</head>
+<body>
+  <div id="swagger-ui"></div>
+  <script src="https://cdn.jsdelivr.net/npm/swagger-ui-dist@5/swagger-ui-bundle.js"></script>
+  <script>SwaggerUIBundle({ url: '/swagger-output.json', dom_id: '#swagger-ui' })</script>
+</body>
+</html>`);
 });
 
 app.use(router);
