@@ -1,10 +1,6 @@
 import { Product } from "@/types/product";
 import axios, { AxiosError } from "axios";
 
-if (!process.env.EXPO_PUBLIC_API_URL) {
-  throw new Error("EXPO_PUBLIC_API_URL is not defined");
-}
-
 const api = axios.create({
   baseURL: process.env.EXPO_PUBLIC_API_URL
 })
