@@ -9,7 +9,19 @@ const SearchInput = ({
     setSearchInput: (input: string) => void;
 }) => {
     return (
-        <View className="flex-row items-center h-12 px-6 py-3 bg-white rounded-3xl mx-5">
+      <View className='flex flex-row gap-5 items-center px-6 py-1 bg-white rounded-3xl mx-5'>
+        <FontAwesome6 name="magnifying-glass" size={16} color="#ea580c" />
+        <TextInput value={searchInput} onChangeText={setSearchInput} placeholder='Search '  
+        className=' grow'
+        />
+      </View>
+    );
+};
+
+export default SearchInput
+
+// bug in view
+{/* <View className="flex-row items-center h-12 px-6 py-3 bg-white rounded-3xl mx-5">
             <FontAwesome6 name="magnifying-glass" size={16} color="#ea580c" />
             <TextInput
                 style={{
@@ -32,8 +44,4 @@ const SearchInput = ({
                 value={searchInput}
                 onChangeText={setSearchInput}
             />
-        </View>
-    );
-};
-
-export default SearchInput
+        </View> */}
