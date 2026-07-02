@@ -28,7 +28,7 @@ export default function SearchScreen() {
     queryFn: async () => {
       const result = await searchProducts(debounceSearchInput)
       setItem(debounceSearchInput)
-      console.log("result at comp", result)
+      console.log("result at search comp", result)
       if (typeof result === 'object' && result !== null) {
         setProducts(result)
       }
@@ -43,7 +43,7 @@ export default function SearchScreen() {
   } , [debounceSearchInput]) 
 
   return (
-    <SafeAreaView className="flex-1 flex-col gap-5 px-5 bg-[#FAF8F5]">
+    <SafeAreaView style={{ flex: 1 }} className="flex-col gap-5 px-5 bg-[#FAF8F5]">
       <Text className='py-3 font-bold text-xl mx-5'>Discover</Text>
       <SearchInput searchInput={searchInput} setSearchInput={setSearchInput} />
 
@@ -52,22 +52,21 @@ export default function SearchScreen() {
       <RecentSearchComp debounceSearchInput={debounceSearchInput} setSearchInput={setSearchInput} />
 
 
-      {/* results section */}
-
-
-      {/* should use FlatList instead of map */}
-      <View className='flex-1'>
+      {/* results section: direct parent must expand to fill space */}
+      <View style={{ flex: 1 }}>
         <FlashList
           data={products}
+          keyExtractor={(item): string => item._id.toString()}
+          numColumns={2}
+          contentContainerStyle={{
+            paddingHorizontal: 10,
+            paddingBottom: 10,
+          }}
           renderItem={({ item }) => (
             <View className="m-2">
               <ProductComp product={item} />
             </View>
           )}
-          numColumns={2}
-          keyExtractor={(item) => item._id}
-          contentContainerStyle={{ paddingBottom: 24, paddingHorizontal: 2 }}
-          showsVerticalScrollIndicator={false}
         />
       </View>
 

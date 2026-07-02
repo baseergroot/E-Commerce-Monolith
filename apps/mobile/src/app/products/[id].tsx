@@ -2,7 +2,7 @@
 import { View, Text, ActivityIndicator } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useQuery } from '@tanstack/react-query';
-import { getProductById } from '@/lib/axiosClient';
+import { getProductById, getRecomendedProducts } from '@/lib/axiosClient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button } from 'expo-router/build/react-navigation';
 import { Image } from 'react-native';
@@ -29,11 +29,13 @@ export default function ProductDetailScreen() {
     queryKey: ['products', id],
     queryFn: async () => {
       const result = await getProductById(id)
-
+      // console.log({result})
       return result
     },
     enabled: id.length > 0, // don't fire on empty string
   })
+
+
 
   if (isLoading) {
     return (
@@ -97,8 +99,8 @@ export default function ProductDetailScreen() {
             {/* product details */}
             <ScrollView className='w-full h-auto flex-1 px-5 py-3 mb-5 mt-5 '>
               <View className='flex w-full flex-row justify-between '>
-                <Text className="text-xl font-bold w-[90%] text-ellipsis overflow-hidden flex flex-wrap">{product.name}</Text>
-                <Text className="text-xl font-bold w-[10%]">${product.price}</Text>
+                <Text className="text-xl font-bold w-[85%] text-ellipsis overflow-hidden flex flex-wrap">{product.name}</Text>
+                <Text className="text-xl font-bold w-[15%]">${product.price}</Text>
               </View>
               <Text className="text-gray-600 mt-5">{product.description}</Text>
 
@@ -119,19 +121,19 @@ export default function ProductDetailScreen() {
               </View>
 
               {/* qauntity */}
-              
-              <ProductQuantity productQuantity={productQuantity} setProductQuantity={setProductQuantity}/>
+
+              <ProductQuantity productQuantity={productQuantity} setProductQuantity={setProductQuantity} />
 
               {/* add to cart button */}
               <TouchableOpacity
-              onPress={() => addToCart(product, productQuantity)}
-               className='bg-[#fe4343] w-full mt-5 text-center rounded-full py-3 flex flex-row items-center justify-center gap-5'>
+                onPress={() => addToCart(product, productQuantity)}
+                className='bg-[#fe4343] w-full mt-5 text-center rounded-full py-3 flex flex-row items-center justify-center gap-5'>
                 <FontAwesome6 name="bag-shopping" size={16} color="#ffffff" />
                 <Text className='text-white font-bold' onPress={() => { }}>Add to bag</Text>
               </TouchableOpacity>
 
               {/* recomended products */}
-              <RecomendedProducts products={product} />
+              <RecomendedProducts catagory={product.category} />
             </ScrollView>
 
           </View>

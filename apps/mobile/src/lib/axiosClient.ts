@@ -42,6 +42,22 @@ const getProductById = async (id: string): Promise<Product> => {
   }
 }
 
+const getRecomendedProducts = async (category: string): Promise<Product[]> => {
+  try {
+    // products/recommend?category=cloth
+    const { data } = await api.get(`/products/recommend?category=${category}`)
+    // console.log("result at query", data) 
+    // console.log({reco_prod: data.result}) 
+    return data.result as Product[] 
+  } catch (error) { 
+    if (error instanceof AxiosError) {
+      // console.log(error.response?.data)
+      throw new Error(error.response?.data.error as string || "axios error while getting recommended products")
+    }
+    // console.log("error while getting product by id", error)
+    throw new Error("unknown error while getting product by id") 
+  }
+}
 
 export default api
-export { fetchProducts, searchProducts, getProductById }
+export { fetchProducts, searchProducts, getProductById, getRecomendedProducts }
