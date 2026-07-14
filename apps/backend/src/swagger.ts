@@ -2,7 +2,7 @@ import swaggerAutogen from 'swagger-autogen';
 import dotenv from 'dotenv';
 dotenv.config();
 
-const outputFilePath = 'swagger-output.json';
+const outputFilePath = 'public/swagger-output.json';
 const inputFile = 'routes/helper.ts';
 
 if (!process.env.BASE_URL) {
